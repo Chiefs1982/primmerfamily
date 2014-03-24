@@ -16,4 +16,12 @@
 config/database.yml
 public/assets/**
 config/initializers/setup_mail.rb
+config/initializers/secret_token.rb
 config/newrelic.yml
+tmp/**/*
+tmp/*
+doc/api
+doc/app
+*.swp
+*˜
+.DS_Store
