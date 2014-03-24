@@ -1,0 +1,13 @@
+<% if @u.nil? %><%= @email.email %><% else %><%= @u.username %><% end %> Sent you this message.
+-----------------------------------------
+
+<%= @email.body %>
+
+<% if !@u.nil? %>
+  User info:
+
+  Name: <%= "#{@u.firstname} #{@u.lastname}" %>
+  Email: <%= @u.email %>
+  Username: <%= @u.username %>
+  User ID: <%= @u.user_id %>
+<% end %>

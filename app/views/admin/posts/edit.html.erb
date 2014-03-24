@@ -1,0 +1,17 @@
+<div class="links_box">
+  <%= render 'admin/admin_links' %>
+</div>
+<article class="articles">
+  <header>
+    <h1>Edit Article</h1>
+    <%= render 'admin/flash_message' %>
+  </header>
+  <section>
+    <%= form_for(@article, :url => admin_post_path, :method => :put, :html => { :multipart => true }) do |f| %>
+      <%= render 'admin/post_form', :f => f %>
+    <% end %>
+  </section>
+
+  
+
+</article>

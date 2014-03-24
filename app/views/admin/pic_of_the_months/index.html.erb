@@ -1,0 +1,24 @@
+<div class="links_box">
+  <%= render 'admin/admin_links' %>
+</div>
+<article class="articles">
+<header>
+  <h2>Picture of the Month - All</h2>
+  <%= render 'admin/flash_message' %>
+</header>
+  <section>
+    <% if !@potm.empty? %>
+      <% @potm.each do |potm| %>
+        <%= "#{potm.month} #{potm.year}" %><br>
+        <%= "#{potm.title}" %><br>
+        <div id="admin_links">
+          <ul>
+            <li><%= link_to "Edit", edit_admin_potm_path(potm) %></li>
+            <li><%= link_to "Delete", admin_potm_path(potm), :method => :delete, :confirm => "Are You Sure?" %></li>
+          </ul>
+        </div>
+        <hr>
+      <% end %>
+    <% end %>
+  </section>
+</article>

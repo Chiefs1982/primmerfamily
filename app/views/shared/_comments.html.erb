@@ -1,0 +1,20 @@
+<div class="comments">
+  <h3>Comments:</h3>
+  <%= render 'shared/comment_section', :article => article %>
+  <% if signed_in? %>
+    <%= form_for article.comment_form, :url => comments_path do |f| %>
+      <%= render 'layouts/error_messages', :object => f.object %>
+      <div class="field">
+        <%= f.text_area :comment, :class => "comment_content", :maxlength => 250, :rows => 4, :placeholder => "Leave a comment..." %>
+      </div>
+        <%= f.hidden_field :article_id, :value => "#{article.article_id}" %>
+        <%= f.hidden_field :user_id, :value => "#{current_user.user_id}" %>
+      <div class="actions">
+        <%= f.submit "Comment", :class => "submit_button" %>
+        <div class="char_left"></div>
+      </div>
+    <% end %>
+  <% else %>
+    <div>You must be signed in to leave a comment...</div>
+  <% end %>
+</div>

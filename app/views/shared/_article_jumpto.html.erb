@@ -1,0 +1,8 @@
+<div class="links_box">
+  Jump to: 
+  <% if !articles.empty? %>
+    <% articles.each do |article| %>
+      <%= link_to "#{article.article_link}", "##{article.article_link}" %>
+    <% end %>
+  <% end %>
+</div>

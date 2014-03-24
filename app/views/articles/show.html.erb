@@ -1,0 +1,47 @@
+<div class="links_box">
+</div>
+<article class="articles">
+  <header>
+  <% if !@article.nil?  %>
+    <h2><%= @article.article_header %></h2>
+      <% if @article.top_pics %>
+        <% if !@article.pictures.empty? %>
+          <div class="toppic_box">
+            <% @article.pictures.each do |pictures| %>
+              <% if pictures.toppic == 1 %>
+                  <div class="toppic_picture">
+                  <%= link_to image_dim(pictures.picture.url(:thumb), pictures.picture_title), pictures.picture.url(:large) %>
+                  </div>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </header>
+    <section>
+      <p><strong><%= @article.article_body %></strong></p>
+        <% if @article.article_pics %>
+          <% if !@article.pictures.empty? %>
+            <div class="picture_box">
+              <% @article.pictures.each do |pictures| %>
+                <% if pictures.toppic == 0 %>
+                  <div class="picture">
+                  <%= link_to image_dim(pictures.picture.url(:thumb), pictures.picture_title), pictures.picture.url(:large) %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+    </section>
+    <footer>
+      Posted <%= time_ago_in_words(@article.created_at) %> ago.  <%= link_to "[Back to Top]", "#" %>
+    </footer>
+
+    <%= render 'shared/comments', :article => @article %>
+  <% else %>
+    <p>There was an error getting that article, it possibly does not exist.  Please go <%= link_to "here", archive_path %> to see a list of articles to choose from.  Thanks.</p>
+  <% end %>
+    
+
+</article>

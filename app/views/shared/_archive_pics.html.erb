@@ -1,0 +1,11 @@
+<%= will_paginate @pictures %>
+<div class="picture_box">
+  <% unless @pictures.empty? %>
+    <% @pictures.each do |picture| %>
+      <div class="picture">
+        <%= image_dim(picture.picture.url(:thumb), picture.picture_title) %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<%= will_paginate @pictures %>

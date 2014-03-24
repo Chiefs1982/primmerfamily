@@ -1,0 +1,54 @@
+<div class="links_box">
+  <%= render 'admin/admin_links' %>
+</div>
+<article class="articles">
+  <header>
+    <h1>Email</h1>
+    <%= render 'admin/flash_message' %>
+  </header>
+  
+  <% if !@emails.nil? %>
+    <%= will_paginate @emails %>
+    
+    <table id="user_table">
+      <thead>
+        <tr>
+          <th>From</th>
+          <th>Subject</th>
+          <th>Date</th>
+          <th>User ID</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @emails.each do |email| %>
+          <tr>
+            <td><%= email.email %></td>
+            <td><%= email.subject %></td>
+            <td><%= email.created_at %></td>
+            <% if !email.user_id.nil? %>
+              <td><%= email.user_id %></td>
+            <% else %>
+              <td>N/A</td>
+            <% end %>
+            <td><%= link_to "View", admin_email_path(email.id) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= will_paginate @emails %>
+  
+  <% else %>
+    <p>There are no Emails to display</p>
+  <% end %>
+
+  <% unless @email.nil? %>
+    <p><strong>From: </strong><%= @email.email %></p>
+    <p><strong>Subject: </strong><%= @email.subject %></p>
+    <p><strong>Body: </strong><%= @email.body %></p>
+    <% unless @email.user_id.nil? %>
+      <p><strong>User ID: </strong><%= @email.user_id %></p>
+    <% end %>
+  <% end %>
+</article>

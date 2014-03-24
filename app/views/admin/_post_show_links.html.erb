@@ -1,0 +1,7 @@
+<div id="admin_links">
+  <ul>
+    <li><%= link_to "Edit", edit_admin_post_path(@article.article_id) %></li>
+    <li><%= link_to "Delete", admin_post_path(@article.article_id), :method => :delete, :confirm => "Are You Sure?" %></li>
+    <li>Posted <%= time_ago_in_words(@article.created_at) %> ago.</li>
+  </ul>
+</div>

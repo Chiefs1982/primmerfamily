@@ -1,0 +1,29 @@
+<div class="links_box">
+  <%= render 'admin/admin_links' %>
+</div>
+<article class="articles">
+  <header>
+    <h1>This is the Show Page</h1>
+    <%= render 'admin/flash_message' %>
+  </header>
+
+  <% if !@article.nil? %>
+    <%= render 'admin/post_show_links' %>
+    <h2><%= @article.article_header %></h2>
+    <p><%= @article.article_body %></p>
+    <p>Article ID: <%= @article.article_id %></p>
+    <p>Article Link: <%= @article.article_link %></p>
+    <p>Article Tags: <%= @article.article_tags %></p>
+    <% if !@article.pictures.empty? %>
+      <div id="picture_box">
+        <% @article.pictures.each do |pictures| %>
+          <div class="picture">
+          <%= link_to image_dim(pictures.picture.url, pictures.picture_title), pictures.picture.url %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+    <%= render 'shared/comments', :article => @article %>
+    <%= render 'admin/post_show_links' %>
+  <% end %>
+</article>

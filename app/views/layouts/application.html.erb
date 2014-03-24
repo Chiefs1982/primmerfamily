@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= titler %></title>
+  <%= render 'layouts/stylesheets' %>
+  <%= javascript_include_tag :application %>
+  <%= javascript_include_tag 'colorbox/jquery.min.js' %>
+  <%= javascript_include_tag 'colorbox/jquery.colorbox-min.js' %>
+  <%= csrf_meta_tags %>
+  <%= auto_discovery_link_tag :atom, "/feed" %>
+</head>
+<body>
+  <div id="full_body_box">
+    <div id="top_area">
+      <div id="logo_box"><%= main_logo :width => 200 %></div>
+      <div id="inside_top_box">
+        <div id="title_box">PrimmerFamily.net</div>
+        <div id="nav_box">
+          <ul>
+            <li><%= link_to "Home", root_path %></li>
+            <li><%= link_to "About", about_path %></li>
+            <li><%= link_to "Contact", contact_path %></li>
+            <li><%= link_to "Archive", archive_path %></li>
+            <li><%= link_to "Miles", miles_path %></li>
+          </ul>
+          <% if signed_in? %>
+            <div id="signin_logged">Welcome, <strong><%= link_to "#{current_user.firstname}", user_path(current_user.username) %></strong> <span>(<%= link_to "logout", signout_path %>)</span></div>
+          <% else %>
+            <div id="signin"><%= link_to "Sign in", signin_path, :class => "signin_link" %> <span>(<%= link_to "sign up", signup_path %>)</span></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div id="info_box">
+      <div class="info_box_text">
+        <ul>
+          <li>Best viewed with <%= link_to "Firefox", "http://mozilla.org" %> or <%= link_to "Chrome", "http://chrome.com" %></li>
+          <li><div id="social_box"><%= render 'shared/social_media' %></div></li>
+
+        </ul>
+             
+      </div>
+      <div id="newsletter_box">
+        <%= form_for @news, :url => newsletters_path do |f| %>
+          <%= f.text_field :email, :placeholder => "Newsletter Sign Up, Enter Email", :size => 30 %>
+          <%= f.submit "Sign Up", :class => "submit_button" %>
+        <% end %>
+      </div>
+    </div>
+    <div id="body_box">
+      <div id="side_boxes">
+        <div id="search_box">
+          
+        </div>
+        <div id="side_box">
+          <h3>Picture of the Month!</h3>
+          <h4><%= the_month %></h4>
+          <div id="potm_pic">
+            <%= link_to image_dim(@potmvar.picmonth.url(:thumb),@potmvar.title, :potm => true),@potmvar.picmonth.url(:large), :class => "potm_pic_display", :title => @potmvar.title %>
+          </div>
+          <div id="potm_text">
+            <strong><%= @potmvar.title %></strong>
+          </div>
+          <%= javascript_tag do %>
+            $("<%= ".potm_pic_display" %>").colorbox({ opacity:0.5, rel:'<%= "group1" %>', current: false});
+          <% end %>
+        </div>
+        <div id="side_box">
+          <h2>Family Birthdays!</h2>
+          <% if bday_today_exists? %>
+            <% if !@bdays.empty? %>
+              <div id="bday_today_text">
+                <h3>***Today***</h3>
+                <% @bdays.each do |bday| %>
+                  <% if bday.month == @month && bday.day == @day %>
+                    <strong><%= "#{bday.firstname} #{bday.lastname}" %></strong><br>
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
+          <% if !@bdays.empty? %>
+            <div id="bday_text">
+              <% @bdays.each do |bday| %>
+                <% if "#{bday.month}#{bday.day}" != "#{@month}#{@day}" %>
+                  <strong><%= "#{get_month(bday.month,bday.day)} - #{bday.firstname} #{bday.lastname}" %></strong><br>
+                <% end %>
+              <% end %>
+            </div>
+            
+          <% end %>
+        </div>
+        <div id="side_box">
+          <h3>Recent Articles</h3>
+          <div id="side_article_text">
+            <% unless @topten.empty? %>
+              <ul>
+                <% @topten.each do |article| %>
+                  <li><%= link_to "#{article.article_header}", article_path(article.article_id), :title => "#{article.article_header}" %></li>
+                <% end %>
+              </ul>
+            <% end %>
+          </div>
+        </div>
+
+      </div>
+      
+      <div id="article_box">
+        <%= yield %>
+      </div>
+
+    </div>
+    <footer id="footer">
+      <ul>
+        <li><%= "#{@counter.hit_counter} Views" %></li>
+      </ul>
+    </footer>
+      <%= debug params if Rails.env.development? %>
+  </div>
+</body>
+</html>

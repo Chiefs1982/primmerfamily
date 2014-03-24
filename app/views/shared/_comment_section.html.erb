@@ -1,0 +1,22 @@
+<% if !article.comments.empty? %>
+  <% article.comments.each do |comment| %>
+    <div class="comment">
+      <% if signed_in? %>
+        <% if current_user.user_id == comment.user_id || super_user %>
+          <div class="comment_delete">
+            <%= link_to "Delete", comment_path(comment.id), :method => :delete, :confirm => "Are You Sure?" %>
+          </div>
+        <% end %>
+      <% end %>
+      <h6><%= comment_user(comment.user_id) %>:</h6><br>
+      <p><strong><%= comment.comment %></strong></p>
+      <div class="comment_date">
+        <br><%= time_ago_in_words(comment.created_at) %> ago<br>
+      </div>
+    </div>
+    <div>
+    </div>
+  <% end %>
+<% else %>
+  <div class="comment">Be the first to leave a comment!</div>
+<% end %>

@@ -1,0 +1,13 @@
+<div class="links_box">
+</div>
+<article class="articles">
+  <header>
+    <h1>Sign Up</h1>
+  </header>
+  <%= form_for @user, :html => {:multipart => true} do |f| %>
+    <%= render 'shared/user_form', :f => f %>
+  <div class="acions">
+    <%= f.submit "Sign Up", :class => "submit_button" %>
+  </div>
+  <% end %>
+</article>

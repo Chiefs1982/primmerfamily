@@ -1,0 +1,28 @@
+<div class="links_box">
+  <%= render 'admin/admin_links' %>
+</div>
+<article class="articles">
+  <header><h2>All Articles</h2></header>
+  
+
+  <% if !@article.empty? %>
+    <% @article.each do |article| %>
+      <h3><%= article.article_header %></h3>
+      <p><%= article.article_body.truncate(200) %></p>
+      <p><%= pluralize(article.pictures.count, "picture") %></p>
+      <p><%= pluralize(article.comments.count, "comment") %></p>
+      <p>Article ID: <%= article.article_id %></p>
+      <div id="admin_links">
+        <ul>
+          <li><%= link_to "Edit", edit_admin_post_path(article.article_id) %></li>
+          <li><%= link_to "Show", admin_post_path((article.article_id)) %></li>
+          <% if admin_user %>
+            <li><%= link_to "Delete", admin_post_path(article.article_id), :method => :delete, :confirm => "Are You Sure?" %></li>
+          <% end %>
+          <li>Posted <%= time_ago_in_words(article.created_at) %> ago.</li>
+        </ul>
+      </div>
+      <hr>
+    <%end%>
+  <% end %>
+</article>

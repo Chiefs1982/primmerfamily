@@ -1,0 +1,19 @@
+<%= render 'layouts/error_messages', :object => f.object %>
+<%= f.label :month %>
+<%= f.select :month, options_for_select(month, f.object.month) %>
+
+<%= f.label :year %>
+<%= f.select :year, options_for_select(year, f.object.year) %><br><br>
+
+<%= f.label :picmonth, "Upload Picture" %>
+<%= f.file_field :picmonth %><br><br>
+
+<% unless f.object.new_record? %>
+  <%= "Uploaded Picture" %>
+  <%= image_tag(f.object.picmonth.url(:thumb), :width => "75px") %><br><br>
+<% end %>
+
+<%= f.label :title %>
+<%= f.text_field :title, :maxlength => 100 %><br>
+
+<%= f.submit "Save", :class => "submit_button" %>

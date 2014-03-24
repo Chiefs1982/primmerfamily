@@ -1,0 +1,27 @@
+<div class="links_box">
+</div>
+<article class="articles">
+  <header>
+    <h2>Reset Your Password</h2>
+    <%= render 'admin/flash_message' %>
+  </header>
+  <section>
+    <%= form_for @user, :url => up_path(@user.forgot_pw), :method => :put do |f| %>
+      <div id="fields">
+        <%= f.label :email %><br>
+        <%= f.text_field :email %><br><br>
+      </div>
+      <div id="fields">
+        <%= f.label :password %><br>
+        <%= f.password_field :password %><br><br>
+      </div>
+      <div id="fields">
+        <%= f.label :password_confirmation %><br>
+        <%= f.password_field :password_confirmation %><br><br>
+      </div>
+      <div id="fields">
+        <%= f.submit "Change", :class => "submit_button" %><br>
+      </div>
+    <% end %>
+  </section>
+</article>

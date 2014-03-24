@@ -1,0 +1,19 @@
+<div class="links_box">
+</div>
+<article class="articles">
+  <header>
+    <h2>Forgot Password</h2>
+    <%= render 'admin/flash_message' %>
+  </header>
+  <section>
+    <%= form_for @user, :url => create_fp_path, :method => :post do |f| %>
+      <div id="fields">
+        <%= f.label :email %><br>
+        <%= f.text_field :email %><br><br>
+      </div>
+      <div id="actions">
+        <%= f.submit "Submit", :class => "submit_button" %><br>
+      </div>
+    <% end %>
+  </section>
+</article>

@@ -1,0 +1,43 @@
+<div class="links_box">
+</div>
+<article class="articles">
+  <header>
+    <h2><%= @user.firstname %> <%= @user.lastname %></h2>
+    <%= render 'admin/flash_message' %>
+  </header>
+  <section>
+    <p><strong>User picture: </strong> <%= image_tag @user.user.url(:thumb), :width => "50px" %></p>
+    <p><strong>Username: </strong> <%= @user.username %></p>
+    <p><strong>Email: </strong> <%= @user.email %></p>
+    <p><strong>Password: </strong> ******</p>
+    <p><strong>Recieve Newsletter: </strong>
+    <%= @user.newsletter ? "Yes" : "No" %></p>
+    <% unless !admin_user %>
+      <p><strong>Admin: </strong>
+      <%= @user.admin ? "Yes" : "No" %></p>
+    <% end %>
+    <% unless !super_user %>
+      <p><strong>Super user: </strong>
+      <%= @user.super_user ? "Yes" : "No" %></p>
+    <% end %>
+    <% unless !admin_user %>
+      <p><%= link_to "Admin Page", admin_root_path %></p>
+    <% end %>
+    
+
+
+  </section>
+  <footer>
+    <div id="user_show_links">
+      <ul>
+        <li><%= link_to "Edit", edit_user_path %></li>
+        <% unless super_user || admin_user %>
+          <li><%= link_to "Delete", user_path(@user.user_id), :method => :delete, :confirm => "Are you sure?" %></li>
+        <% end %>
+        
+      </ul>
+    </div>
+    
+    
+  </footer>
+</article>

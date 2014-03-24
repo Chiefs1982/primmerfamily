@@ -1,0 +1,15 @@
+<div class="links_box">
+</div>
+<article class="articles">
+  <header>
+    <h1>Edit Profile</h1>
+    <%= render 'admin/flash_message' %>
+  </header>
+  <%= form_for @user,:url => user_path(@user.username) do |f| %>
+    <%= render 'shared/user_form', :f => f %>
+  <div class="acions">
+    <%= f.submit "Update", :class => "submit_button" %>
+  </div><br>
+  <p><strong>**You must enter your current password or a new password to update profile**</strong></p>
+  <% end %>
+</article>

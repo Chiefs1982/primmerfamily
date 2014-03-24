@@ -1,0 +1,54 @@
+<div class="links_box">
+  Jump to: 
+  <%= link_to "Archive Pictures", "#ArchivePictures" %>
+  <%= link_to "Archive Articles", "#ArchiveArticles" %>
+  <%= link_to "Archive Picture Of The Month", "#ArchivePOTM" %>
+</div>
+<article class="articles">
+  <header>
+  </header>
+  <section>
+    <%= link_to "", "", :id => "ArchivePictures" %>
+    <div id="arch_pics">
+      <h2>Archive Pictures</h2>
+      <%= render 'shared/archive_pics' %>
+    </div>
+    <hr>
+    <%= link_to "", "", :id => "ArchiveArticles" %>
+    <div id="arch_articles">
+      <h2>Archive Articles</h2>
+      <% unless @articles.empty? %>
+        <% @articles.each do |article| %>
+          <div class="arch_article_each">
+            <%= link_to "#{article.article_header}", article_path(article.article_id), :title => "#{article.article_header}" %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <hr>
+    <%= link_to "", "", :id => "ArchivePOTM" %>
+    <div id="arch_potm">
+      <h2>Archive Picture of the Month</h2>
+      <% unless @potm.empty? %>
+        <%= archive_potm(@potm) %>
+        <% unless @poftm.empty? %>
+          <% @poftm.each do |key,value| %>
+            <div class="arch_potm_each">
+              <h3><%= key %></h3>
+                <ul>
+                  <% value.each do |k,v| %>
+                    <% if v.nil? %>
+                      <li><%= k %></li>
+                    <% else %>
+                      <li><%= link_to k, v[:url] %></li>
+                    <% end %>
+                  <% end %>
+                </ul>
+            </div>
+          <% end %>
+        <% end %>
+        
+      <% end %>
+    </div>
+  </section>
+</article>

@@ -1,0 +1,22 @@
+<%= render 'layouts/error_messages', :object => f.object %>
+<table>
+  <tr>
+    <td><%= f.label :firstname %></td>
+    <td><%= f.text_field :firstname %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :lastname %></td>
+    <td><%= f.text_field :lastname %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :month %></td>
+    <td><%= f.select :month, options_for_select(month, f.object.month) %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :day %></td>
+    <td><%= f.select :day, options_for_select(day, f.object.day) %></td>
+  </tr>
+  <tr>
+    <td><%= f.submit "Save", :class => "submit_button" %></td>
+  </tr>
+</table>

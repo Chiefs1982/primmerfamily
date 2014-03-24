@@ -1,0 +1,27 @@
+<div class="links_box">
+</div>
+<article class="articles">
+  <header>
+    <h1>Contact Me</h1>
+    <%= render 'admin/flash_message' %>
+  </header>
+  <section>
+    <%= form_for @contact, :url => contacts_path, :method => :post do |f| %>
+      <div class="fields">
+        <%= f.label :email %><br>
+        <%= f.text_field :email, :placeholder => "Enter Your Email" %><br><br>
+      </div>
+      <div class="fields">
+        <%= f.label :subject %><br>
+        <%= f.text_field :subject, :placeholder => "Subject" %><br><br>
+      </div>
+      <div class="fields">
+        <%= f.label :body %><br>
+        <%= f.text_area :body, :placeholder => "Body" %><br><br>
+      </div>
+      <div class="actions">
+        <%= f.submit "Send", :class => "submit_button" %><br>
+      </div>
+    <% end %>
+  </section>
+</article>

@@ -1,0 +1,14 @@
+<div class="links_box">
+  <%= render 'admin/admin_links' %>
+</div>
+<article class="articles">
+  <header>
+    <h1>New Birthday</h1>
+    <%= render 'admin/flash_message' %>
+  </header>
+  <section>
+  <%= form_for @bday, :url => admin_birthdays_path, :html => {:multipart => true} do |f| %>
+    <%= render 'admin/bday_form', :f => f %>
+  <% end %>
+  </section>
+</article>

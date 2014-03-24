@@ -1,0 +1,50 @@
+<% if !articles.empty? %>
+  <% articles.each do |article| %>
+    <article class="articles">
+      <header>
+        <%= link_to "", "", :id => "#{article.article_link}" %>
+        <h1><%= article.article_header %></h1>
+        <% if article.top_pics %>
+          <% if !article.pictures.empty? %>
+            <% if toppic_exists(article) %>
+              <div class="toppic_box">
+                <% article.pictures.each do |pictures| %>
+                  <% if pictures.toppic == 1 %>
+                      <div class="toppic_picture">
+                      <%= link_to image_dim(pictures.picture.url(:thumb), pictures.picture_title), pictures.picture.url(:large), :class => "article#{article.article_id}", :data_pics => article.article_id %>
+                      </div>
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </header>
+      <section>
+        <p><strong><%= article.article_body %></strong></p>
+        <% if article.article_pics %>
+          <% if !article.pictures.empty? %>
+            <div class="picture_box">
+              <% article.pictures.each do |pictures| %>
+                <% if pictures.toppic == 0 %>
+                  <div class="picture">
+                  <%= link_to image_dim(pictures.picture.url(:thumb), pictures.picture_title), pictures.picture.url(:large), :class => "article#{article.article_id}", :title => pictures.picture_title %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      </section>
+      <footer>
+        Posted <%= time_ago_in_words(article.created_at) %> ago.  <%= link_to "[Back to Top]", "#" %>
+      </footer>
+      <%= render 'shared/comments', :article => article %>
+    </article>
+    <%= javascript_tag do %>
+      $("<%= ".article#{article.article_id}" %>").colorbox({ opacity:0.5, rel:'<%= "group#{article.article_id}" %>', current: false});
+    <% end %>
+  <% end %>
+<% else %>
+<% end %>
+

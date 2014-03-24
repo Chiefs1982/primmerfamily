@@ -1,0 +1,47 @@
+<%= render 'layouts/error_messages', :object => f.object %>
+<div class="field">
+  <%= f.label :article_header %>
+  <%= f.text_field :article_header, :id => "article_header", :maxlength => 100, :size => 100 %><br>
+</div>
+<div class="field">
+  <%= f.label :article_body %><br>
+  <%= f.text_area :article_body, :id => "article_body", :maxlength => 2000, :rows => 6 %><br>
+</div>
+<div class="field">
+  <%= f.label :article_id, "Article ID: #{@article.article_id}" %>
+  <%= f.hidden_field :article_id, :id => "article_dynamic", :maxlength => 20, :size => 20, :value => @article.article_id %><br>
+</div>
+<div class="field">
+  <%= f.label :article_link %>
+  <%= f.text_field :article_link, :id => "article_link", :maxlength => 20, :size => 20 %><br>
+</div>
+<div class="field">
+  <%= f.label :article_video %>
+  <%= f.text_field :article_video, :id => "article_video", :maxlength => 1, :size => 1, :value => 0 %><br>
+</div>
+<div class="field">
+  <%= f.label :article_tags %>
+  <%= f.text_field :article_tags, :id => "article_tags", :maxlength => 100, :size => 100 %><br>
+</div>
+<%= f.fields_for :pictures do |ff| %>
+
+  <% if ff.object.new_record? %>
+    <%= ff.check_box :toppic %>
+    <%= ff.label :toppic, "Top pic " %>
+    <%= ff.file_field :picture %>
+    <%= ff.text_field :picture_title %><br>
+  <% end %>
+<% end %>
+<%= f.fields_for :pictures do |ff| %>
+  <% unless ff.object.new_record? %>
+    <%= ff.check_box :toppic %>
+    <%= ff.label :toppic, "Top pic " %>
+    <%= link_to image_tag(ff.object.picture.url(:thumb), :width => "75px"), ff.object.picture(:original) %>
+    <%= ff.text_field :picture_title %>
+    <%= ff.check_box :_destroy %>
+    <%= ff.label :_destroy, "Delete" %><br>
+  <% end %>
+<% end %>
+<div class="actions">
+  <%= f.submit "Post", :class => "submit_button" %>
+</div>

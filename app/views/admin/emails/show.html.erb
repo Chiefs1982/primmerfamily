@@ -1,0 +1,19 @@
+<div class="links_box">
+  <%= render 'admin/admin_links' %>
+</div>
+<article class="articles">
+  <%= link_to "Back", admin_emails_path %>
+  <header>
+    <h1>Email</h1>
+    <%= render 'admin/flash_message' %>
+  </header>
+
+  <% unless @email.nil? %>
+    <p><strong>From: </strong><%= @email.email %></p>
+    <p><strong>Subject: </strong><%= @email.subject %></p>
+    <p><strong>Body: </strong><%= @email.body %></p>
+    <% unless @email.user_id.nil? %>
+      <p><strong>User ID: </strong><%= @email.user_id %></p>
+    <% end %>
+  <% end %>
+</article>

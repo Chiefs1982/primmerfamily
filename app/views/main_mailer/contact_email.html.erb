@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h2>
+    <% if @u.nil? %>
+      <%= @email.email %>
+    <% else %>
+      <%= @u.username %>
+    <% end %> Sent you this message.</h2>
+    <p>
+      <%= @email.body %>
+    </p>
+      <% if !@u.nil? %>
+        <p>User info:</p>
+
+        <p>Name: <%= "#{@u.firstname} #{@u.lastname}" %></p>
+        <p>Email: <%= @u.email %></p>
+        <p>Username: <%= @u.username %></p>
+        <p>User ID: <%= @u.user_id %></p>
+      <% else %>
+      <% end %>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome to the PrimmerFamily.net newsletter, <%= @user.email %></h1>
+    <p>
+      You have successfully signed up to receive the newsletter from PrimmerFamily.net<br>
+    </p>
+    <p>
+      To unsubscribe please click this link: <%= link_to "Remove Email", @url %>.
+    </p>
+    <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>
